@@ -11,9 +11,19 @@ const schema = gql`
     books: [Book]
   }
 
-  type Query {
-    books: [Book] 
+  type Quiz {
+    id: Int!
+    title: String!
+    description: String!
+    quizdata: String!
   }
+
+  type Query {
+    books: [Book!] 
+    getQuizzes: [Quiz!]
+  }
+  
+  
 `;
 
 export default schema;
