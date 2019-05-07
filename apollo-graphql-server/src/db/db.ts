@@ -7,7 +7,7 @@ const connectionSettings = {
   user: 'postgres',
   password: 'qz101022',
   min: 1,
-  max: 10
+  max: 20
 };
 const pgp = createPgPromise();
 const db = pgp(connectionSettings);
