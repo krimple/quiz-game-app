@@ -29,8 +29,8 @@ const QuizGame = ({question}) => {
   if (!question || !question.text) {
     return <p>No question yet...</p>;
   }
-  const choices = question.choices.map(choice => {
-    return (<Choice><AnswerButton>{ choice.key }</AnswerButton>{ choice.text }</Choice>)
+  const choices = question.choices.map((choice, idx) => {
+    return (<Choice key={idx}><AnswerButton>{ choice.key }</AnswerButton>{ choice.text }</Choice>)
   });
   return <Panel>
     <GameTitle text="Quiz Game" />
