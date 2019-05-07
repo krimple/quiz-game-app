@@ -9,6 +9,7 @@
     "apollo-link": "^1.2.11",
     "apollo-link-ws": "^1.0.17",
     "graphql": "^14.2.1",
+    "http-proxy-middleware": "^0.19.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.0",
