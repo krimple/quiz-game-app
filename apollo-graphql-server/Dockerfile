@@ -14,5 +14,5 @@ COPY . .
 
 RUN tsc
 
-ENTRYPOINT ["/bin/sh", "-c", "NODE_OPTIONS=\"--max-old-space-size=8192\" npm start dist/server/server.js"]
+ENTRYPOINT ["/bin/sh", "-c", "NODE_OPTIONS=\"--max-old-space-size=8192\" node dist/server/server.js"]
 

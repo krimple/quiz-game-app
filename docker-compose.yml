@@ -2,23 +2,22 @@ version: "3.7"
 
 services:
 
-  apache:
-    container_name: quizzo-apache
-    build:
-      context: ./apache/
-    volumes:
-      - ${CONFIG_DIR}/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
-      - ${CERTS_DIR}:/etc/ssl/crt:ro
-    networks:
-      - frontend
-    links:
-      - appserver:appserver
-    ports:
-      - "443:443"
-      - "80:80"
-    depends_on:
-      - appserver
-      - db
+#  apache:
+#    container_name: quizzo-apache
+#    build:
+#      context: ./apache/
+#    volumes:
+#      - ${CONFIG_DIR}/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+#      - ${CERTS_DIR}:/etc/ssl/crt:ro
+#    networks:
+#      - frontend
+#    links:
+#      - appserver:appserver
+#    ports:
+#      - "80:80"
+#    depends_on:
+#      - appserver
+#      - db
 
   appserver:
     container_name: appserver
@@ -30,7 +29,7 @@ services:
     links:
       - db:db
     ports:
-      - "4000:4000"
+      - "80:4000"
     depends_on:
       - db
 
@@ -67,7 +66,7 @@ services:
 
   flyway:
     image: boxfuse/flyway:6.0.0-beta
-    command: migrate -X -connectRetries=300
+    command: migrate -X -password=${POSTGRES_PASSWORD} -user=${POSTGRES_USER} -connectRetries=300
     networks:
       - backend
     volumes:
