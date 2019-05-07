@@ -42,6 +42,13 @@ export const resolvers = {
     getQuizList: () => {
       return getQuizList()
     }
+  },
+  Subscription: {
+    questionSubscription: {
+      subscribe: (parent, args, ctx) => {
+        return ctx.PubSub.asyncIterator(['nextQuestion']);
+      }
+    }
   }
 };
 

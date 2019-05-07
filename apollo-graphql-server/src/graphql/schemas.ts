@@ -18,6 +18,19 @@ const schema = gql`
     quizdata: String!
   }
   
+  type Choice {
+    id: Int!
+    key: String!
+    text: String!
+    correct: Boolean!
+  }
+  
+  type Question {
+    id: Int!
+    text: String!
+    choices: [Choice]
+  }
+  
   type QuizListing {
     id: Int!
     title: String!
@@ -28,6 +41,11 @@ const schema = gql`
     books: [Book!] 
     getQuizzes: [Quiz!]
     getQuizList: [QuizListing!]
+    getRandomQuestion: Question
+  }
+  
+  type Subscription {
+    questionSubscription: Question
   }
 `;
 

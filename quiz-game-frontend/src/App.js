@@ -1,27 +1,36 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import { getBooks } from "./graphql/game-api";
+import {subscribeToQuestionStream} from './graphql/game-api';
 import QuizGame from './game/QuizGame';
 
-function App() {
-  const [books, setBooks] = useState([]);
-  getBooks().then(r => setBooks(r.data.books), e => console.error(e));
-  return (
-    <div className="App">
+export default class App extends Component {
+  // to hold the subscription reference. Not something we need to store in state
+  // as it is transient and controlled by ZenObservable and the GraphQL API
+  subscription = undefined;
 
-      {
-        books &&
-        <ul>
-          { books.map((b,idx) => (<li key={idx}>{b.title}</li>)) }
-        </ul>
-      }
+  state = {
+    question: {},
+    subscription: undefined
+  };
 
-      <QuizGame/>
+  componentDidMount() {
+     this.subscription = subscribeToQuestionStream(
+       (question) => this.setState({ question }),
+       (error) => alert('A piper is down...'),
+       () => alert('we\'re done here...')
+     );
+  }
 
-   </div>
-  );
+  componentWillUnmount() {
+    this.subscription.disconnect();
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <QuizGame question={this.state.question} />
+     </div>
+    );
+  }
 }
 
-
-
-export default App;

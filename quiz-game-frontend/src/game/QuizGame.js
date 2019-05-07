@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import AnswerButton from './widgets/AnswerButton';
 import styled from 'styled-components';
 import Panel from './widgets/Panel';
 
@@ -24,14 +25,6 @@ const Choice = styled.li`
      color: #111;
 `;
 
-const Button = styled.button`
-  font-size: 2em;
-  font-family: Courier New,serif;
-  background-color:#fff;
-  border: 1px solid black;
-  margin: .1em;
-`;
-
 const QuizGame = (props) => {
    return <Panel>
       <GameTitle text="Quiz Game" />
@@ -40,9 +33,9 @@ const QuizGame = (props) => {
          How much wood could a woodchuck chuck?
       </Question>
       <Choices>
-         <Choice><Button>A</Button>Good question. Any ideas?</Choice>
-         <Choice><Button>B</Button>Three cords. If you know what a cord is...</Choice>
-         <Choice><Button>C</Button>Socrates is a man, man is mortal, therefore Socrates is mortal...</Choice>
+         <Choice><AnswerButton>A</AnswerButton>Good question. Any ideas?</Choice>
+         <Choice><AnswerButton>B</AnswerButton>Three cords. If you know what a cord is...</Choice>
+         <Choice><AnswerButton>C</AnswerButton>Socrates is a man, man is mortal, therefore Socrates is mortal...</Choice>
       </Choices>
    </Panel>;
 };

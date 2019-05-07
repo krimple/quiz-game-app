@@ -40,3 +40,23 @@ export async function getQuizList() {
     }
   });
 }
+
+export function subscribeToQuestionStream() {
+  return gameClient.subscribe({
+    query: gql`
+      subscription {
+        questionSubscription {
+          question {
+            id
+            text
+            options {
+              id
+              key
+              text
+            }
+          }
+        }
+      }
+    `
+  })
+}
