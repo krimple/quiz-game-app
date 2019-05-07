@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { getBooks } from "./graphql/game-api";
+import QuizGame from './game/QuizGame';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -14,6 +15,9 @@ function App() {
           { books.map((b,idx) => (<li key={idx}>{b.title}</li>)) }
         </ul>
       }
+
+      <QuizGame/>
+
    </div>
   );
 }
