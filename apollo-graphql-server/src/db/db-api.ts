@@ -8,4 +8,13 @@ export const getQuizzes = async () => {
     console.dir(e);
     throw e;
   }
-}
+};
+
+export const getQuizList = async () => {
+  try {
+    return await db.any('SELECT id, title, description from quizzo.quiz');
+  } catch (e) {
+    console.log('Error occurred when fetching quiz data');
+    console.dir(e);
+  }
+};

@@ -15,7 +15,15 @@ type Book {
 }
 
 type Query {
-    books: [Book]
+    books: [Book!]
+    getQuizzes: [Quiz!]
+}
+
+type Quiz {
+    description: String!
+    id: Int!
+    quizdata: String!
+    title: String!
 }
 
 enum CacheControlScope {

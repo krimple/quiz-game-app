@@ -22,3 +22,12 @@ exports.getQuizzes = () => __awaiter(this, void 0, void 0, function* () {
         throw e;
     }
 });
+exports.getQuizList = () => __awaiter(this, void 0, void 0, function* () {
+    try {
+        return yield db_1.default.any('SELECT id, title, description from quizzo.quiz');
+    }
+    catch (e) {
+        console.log('Error occurred when fetching quiz data');
+        console.dir(e);
+    }
+});

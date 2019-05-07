@@ -1,4 +1,4 @@
-import { getQuizzes } from '../db/db-api';
+import { getQuizzes, getQuizList } from '../db/db-api';
 
 const { find, filter } = require('lodash');
 const books = [
@@ -38,6 +38,9 @@ export const resolvers = {
     books: () => books,
     getQuizzes: () => {
       return getQuizzes().then(quizzes => stripScoresFromQuizzes(quizzes));
+    },
+    getQuizList: () => {
+      return getQuizList()
     }
   }
 };

@@ -18,12 +18,17 @@ const schema = gql `
     description: String!
     quizdata: String!
   }
+  
+  type QuizListing {
+    id: Int!
+    title: String!
+    description: String!
+  }
 
   type Query {
     books: [Book!] 
     getQuizzes: [Quiz!]
+    getQuizList: [QuizListing!]
   }
-  
-  
 `;
 exports.default = schema;

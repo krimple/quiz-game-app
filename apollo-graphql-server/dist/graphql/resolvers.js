@@ -38,6 +38,9 @@ exports.resolvers = {
         books: () => books,
         getQuizzes: () => {
             return db_api_1.getQuizzes().then(quizzes => stripScoresFromQuizzes(quizzes));
+        },
+        getQuizList: () => {
+            return db_api_1.getQuizList();
         }
     }
 };
