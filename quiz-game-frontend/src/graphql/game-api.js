@@ -1,25 +1,6 @@
 import gameClient from './game-client';
 import {gql} from "apollo-boost";
 
-export async function getBooks() {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const result = await gameClient.query({
-        query: gql`
-          query {
-            books {
-              title
-            }
-          }
-        `
-      });
-      resolve(result);
-    } catch (e) {
-      reject(e);
-    }
-  });
-}
-
 export async function getQuizList() {
   return new Promise(async (resolve, reject) => {
     try {
@@ -41,19 +22,44 @@ export async function getQuizList() {
   });
 }
 
-export function subscribeToQuestionStream() {
+export async function randomQuestionQuery() {
+  return new Promise(async (resolve, reject)=> {
+    try {
+      const result = await gameClient.query({
+        query: gql`
+          query {
+            getRandomQuestion {
+              text
+              id
+              choices {
+                id
+                key
+                text
+              }
+            }
+          }
+        `
+      });
+      resolve (result);
+
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
+export function questionStream() {
   return gameClient.subscribe({
     query: gql`
       subscription {
-        questionSubscription {
-          question {
+        questionSubscription{
+          id
+          text
+          choices {
             id
+            key
             text
-            options {
-              id
-              key
-              text
-            }
+            correct
           }
         }
       }

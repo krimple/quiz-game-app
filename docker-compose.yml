@@ -1,26 +1,38 @@
 version: "3.7"
 
 services:
-#  apache:
-#    container_name: quizzo-apache
-#    build:
-#      context: ./apache/
-#      dockerfile: Dockerfile-apache
-#    volumes:
-#      - ${CONFIG_DIR}/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
-#      - ${CERTS_DIR}:/etc/ssl/crt:ro
-#    networks:
-#      - frontend
-#    links:
-#      - spring:spring
-#    ports:
-#      - 443:443
-#      - 80:80
-#    depends_on:
-#      - player-app
-#      - dashboard-app
-#      - moderator-app
-#      - spring
+
+  apache:
+    container_name: quizzo-apache
+    build:
+      context: ./apache/
+    volumes:
+      - ${CONFIG_DIR}/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+      - ${CERTS_DIR}:/etc/ssl/crt:ro
+    networks:
+      - frontend
+    links:
+      - appserver:appserver
+    ports:
+      - "443:443"
+      - "80:80"
+    depends_on:
+      - appserver
+      - db
+
+  appserver:
+    container_name: appserver
+    build:
+      context: ./apollo-graphql-server
+    networks:
+      - frontend
+      - backend
+    links:
+      - db:db
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
 
   db:
     image: postgres:11.2

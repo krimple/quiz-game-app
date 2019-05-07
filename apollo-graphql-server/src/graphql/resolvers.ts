@@ -1,4 +1,5 @@
 import { getQuizzes, getQuizList } from '../db/db-api';
+import { getRandomQuestion} from '../server/random-question-generator';
 
 const { find, filter } = require('lodash');
 const books = [
@@ -35,12 +36,14 @@ const stripScoresFromQuizzes = (quizzes) => {
 
 export const resolvers = {
   Query: {
-    books: () => books,
     getQuizzes: () => {
       return getQuizzes().then(quizzes => stripScoresFromQuizzes(quizzes));
     },
     getQuizList: () => {
       return getQuizList()
+    },
+    getRandomQuestion: () => {
+      return getRandomQuestion();
     }
   },
   Subscription: {

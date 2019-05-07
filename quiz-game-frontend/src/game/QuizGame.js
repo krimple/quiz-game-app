@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Panel from './widgets/Panel';
 
 const GameTitle = (props) => {
-   return <h1>{props.text}</h1>
+  return <h1>{props.text}</h1>
 };
 
 const Question = styled.h2`
@@ -12,7 +12,7 @@ const Question = styled.h2`
 `;
 
 const ChoicesUnstyled = (props)  => {
-   return <ul className="">{ props.children }</ul>
+  return <ul className="">{ props.children }</ul>
 };
 
 const Choices = styled.ul`
@@ -25,19 +25,21 @@ const Choice = styled.li`
      color: #111;
 `;
 
-const QuizGame = (props) => {
-   return <Panel>
-      <GameTitle text="Quiz Game" />
-      <hr/>
-      <Question>
-         How much wood could a woodchuck chuck?
-      </Question>
-      <Choices>
-         <Choice><AnswerButton>A</AnswerButton>Good question. Any ideas?</Choice>
-         <Choice><AnswerButton>B</AnswerButton>Three cords. If you know what a cord is...</Choice>
-         <Choice><AnswerButton>C</AnswerButton>Socrates is a man, man is mortal, therefore Socrates is mortal...</Choice>
-      </Choices>
-   </Panel>;
+const QuizGame = ({question}) => {
+  if (!question || !question.text) {
+    return <p>No question yet...</p>;
+  }
+  const choices = question.choices.map(choice => {
+    return (<Choice><AnswerButton>{ choice.key }</AnswerButton>{ choice.text }</Choice>)
+  });
+  return <Panel>
+    <GameTitle text="Quiz Game" />
+    <hr/>
+    <Question>
+      { question.text }
+    </Question>
+    { choices }
+  </Panel>;
 };
 
 export default QuizGame;

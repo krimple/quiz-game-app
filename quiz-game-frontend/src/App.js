@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {subscribeToQuestionStream} from './graphql/game-api';
+import {questionStream} from './graphql/game-api';
 import QuizGame from './game/QuizGame';
 
 export default class App extends Component {
@@ -14,8 +14,10 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-     this.subscription = subscribeToQuestionStream(
-       (question) => this.setState({ question }),
+     this.subscription = questionStream().subscribe(
+       (result) => {
+         this.setState({question: result.data.questionSubscription})
+       },
        (error) => alert('A piper is down...'),
        () => alert('we\'re done here...')
      );

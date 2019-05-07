@@ -4,7 +4,7 @@ import ApolloClient from "apollo-client";
 console.log('created instance of gameClient script');
 
 // TODO - externalize this setting
-const GRAPHQL_ENDPOINT = "ws://localhost:4000/graphql";
+const GRAPHQL_ENDPOINT = "ws://localhost/graphql";
 
 const link = new WebSocketLink({
   uri: GRAPHQL_ENDPOINT,
